@@ -1,16 +1,20 @@
 import React from "react";
-import { Button, Row, Col } from 'react-bootstrap';
+import { ButtonGroup, Button } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash, faEdit, faLock } from '@fortawesome/free-solid-svg-icons'
 
 export const TableAction = (deleteData, editData, editPass = false) => {
     return (
         {
             selector: 'action',
-            name: 'Action',            
+            name: 'Action',
             cell: row => (
                 <React.Fragment>
-                    {deleteData && <Button aria-label="delete" onClick={() => { deleteData(row) }}>Delete</Button>}
-                    {editData && <Button aria-label="edit" onClick={() => { editData(row) }}>Edit</Button>}
-                    {editPass && <Button aria-label="edit" onClick={() => { editPass(row) }}>Edit Password</Button>}
+                    <ButtonGroup>
+                        {deleteData && <Button variant="danger" aria-label="delete" onClick={() => { deleteData(row) }}><FontAwesomeIcon icon={faTrash} /></Button>}
+                        {editData && <Button variant="primary" aria-label="edit" onClick={() => { editData(row) }}><FontAwesomeIcon icon={faEdit} /></Button>}
+                        {editPass && <Button variant="secondary" aria-label="edit" onClick={() => { editPass(row) }}><FontAwesomeIcon icon={faLock} /></Button>}
+                    </ButtonGroup>
                 </React.Fragment>
             )
         }
