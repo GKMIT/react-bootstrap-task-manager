@@ -39,7 +39,6 @@ class MaterialDataTable extends React.PureComponent {
         const me = this
         crudService._getAll(this.props.url, filter).then(
             result => {
-                console.log('result', result)
                 me.setState({
                     data: result.data.data,
                     totalRows: Number(result.data.total)
@@ -51,12 +50,18 @@ class MaterialDataTable extends React.PureComponent {
         );
     }
 
-    handlePerRowsChange = () => {
-
+    handlePerRowsChange = (e) => {
+        this.setState({
+            pageSize: e
+        })
+        this.getData()
     }
 
-    handlePageChange = () => {
-
+    handlePageChange = (e) => {
+        this.setState({
+            page: e
+        })
+        this.getData()
     }
 
     render() {
