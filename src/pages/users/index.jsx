@@ -44,20 +44,20 @@ class List extends React.Component {
     render() {
         const columns = []
         columns.push({
-            title: "Name",
-            field: "name"
+            name: "Name",
+            selector: "name"
         })
         columns.push({
-            title: "Mobile",
-            field: "mobile"
+            name: "Mobile",
+            selector: "mobile"
         })
         columns.push({
-            title: "Email",
-            field: "email"
+            name: "Email",
+            selector: "email"
         })
         columns.push({
-            title: "DOB",
-            field: "dob"
+            name: "DOB",
+            selector: "dob"
         })
         if (this.deleteCrud && this.editCrud) {
             columns.push(TableAction(this.deleteCrud, this.editCrud))

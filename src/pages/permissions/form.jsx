@@ -37,7 +37,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'details',
             label: 'Details',
-            type: 'text',
+            type: 'textarea',
             value: form.details,
             validation: 'required',
         })

@@ -1,26 +1,14 @@
 import React from 'react';
+import { Alert } from 'react-bootstrap';
+
 
 export default function SimpleSnackbar(props) {
 
-    const Alert = (props) => {
-        // return <MuiAlert elevation={6} variant="filled" {...props} />;
-    }
-
     return (
         <div>
-            {/* <Snackbar
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right',
-                }}
-                open={props.open}
-                autoHideDuration={6000}
-                onClose={() => props.handleClose()}
-            >
-                <Alert onClose={() => props.handleClose()} severity={props.type}>
-                    {props.message}
-                </Alert>
-            </Snackbar> */}
+            <Alert variant={props.type}>
+                {props.message}
+            </Alert>
         </div>
     );
 }

@@ -3,7 +3,7 @@ import Sidebar from "react-sidebar";
 import Header from './header'
 import Footer from './footer'
 import MainMenu from './mainmenu';
-
+import { Container, Row, Col } from 'react-bootstrap';
 class Layout extends React.Component {
     constructor() {
         super()
@@ -48,9 +48,10 @@ class Layout extends React.Component {
                     styles={{ sidebar: { background: "white" } }}
                 >
                     <Header openMenu={openMenu} handleOpenMenu={this.handleOpenMenu} />
-
-                    {this.props.children}
-                    <Footer />
+                    <Container>
+                        {this.props.children}
+                        <Footer />
+                    </Container>
                 </Sidebar>
             </React.Fragment>
         )
