@@ -1,5 +1,5 @@
 import React from 'react';
-import MaterialUICollapseMenu from '../component/mainMenu'
+import CollapseMenu from '../component/mainMenu'
 
 const items = [
     {
@@ -77,7 +77,7 @@ class MainMenu extends React.Component {
     render() {
         return (
             <React.Fragment>                
-                <MaterialUICollapseMenu items={items} />
+                <CollapseMenu items={items} />
             </React.Fragment>
         )
 

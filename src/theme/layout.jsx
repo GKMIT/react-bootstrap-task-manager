@@ -3,52 +3,51 @@ import Sidebar from "react-sidebar";
 import Header from './header'
 import Footer from './footer'
 import MainMenu from './mainmenu';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
+const mql = window.matchMedia(`(min-width: 800px)`);
 class Layout extends React.Component {
     constructor() {
         super()
         this.state = {
-            openMenu: false
+            sidebarDocked: mql.matches,
+            sidebarOpen: false
         }
+
+        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
+        this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
 
-    componentDidMount() {
-        // window.addEventListener("resize", this.resize.bind(this));
-        // this.resize();
+    componentWillMount() {
+        mql.addListener(this.mediaQueryChanged);
     }
 
-    resize() {
-        if (window.innerWidth > 414) {
-            this.setState({
-                openMenu: true
-            })
-        } else {
-            this.setState({
-                openMenu: false
-            })
-        }
+    componentWillUnmount() {
+        this.state.mql.removeListener(this.mediaQueryChanged);
     }
 
-    handleOpenMenu = () => {
-        const { openMenu } = this.state
-        this.setState({
-            openMenu: !openMenu
-        })
+    onSetSidebarOpen() {
+        const { sidebarOpen } = this.state
+        this.setState({ sidebarOpen: !sidebarOpen });
     }
+
+    mediaQueryChanged() {
+        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
+    }
+
 
     render() {
-        const { openMenu } = this.state
+        const { sidebarOpen, sidebarDocked } = this.state
 
         return (
             <React.Fragment>
                 <Sidebar
                     sidebar={<MainMenu />}
-                    open={openMenu}
-                    onSetOpen={this.handleOpenMenu}
-                    styles={{ sidebar: { background: "white" } }}
+                    open={sidebarOpen}
+                    docked={sidebarDocked}
+                    onSetOpen={this.onSetSidebarOpen}
                 >
-                    <Header openMenu={openMenu} handleOpenMenu={this.handleOpenMenu} />
-                    <Container>
+                    <Header openMenu={sidebarOpen} handleOpenMenu={this.onSetSidebarOpen} />
+                    <Container fluid>
                         {this.props.children}
                         <Footer />
                     </Container>

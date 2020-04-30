@@ -1,5 +1,4 @@
 import React from "react";
-// import MaterialTable from 'material-table';
 import DataTable from 'react-data-table-component';
 import { crudService } from '../../_services';
 import { alertActions } from '../../_actions';
