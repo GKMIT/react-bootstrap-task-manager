@@ -6,22 +6,11 @@ import { NavLink } from 'react-router-dom';
 class MenuNode extends React.Component {
 
     render() {
-        const { classes, nested, subNested } = this.props;
-        const { name, icon, link } = this.props.data;
-        let nestedClass = '';
-        // if (nested) {
-        //     nestedClass = classes.nested
-        // }
-
-        // if (subNested) {
-        //     nestedClass = classes.subNested
-        // }
+        const { name, link } = this.props.data;
 
         return (
             <React.Fragment>
-                <ListGroup.Item component={NavLink} to={link} exact>
-                    {/* {icon && <ListItemIcon><Icon>{icon}</Icon></ListItemIcon>} */}
-                    
+                <ListGroup.Item component={NavLink} to={link}>
                     <NavLink to={link}>{name}</NavLink>
                 </ListGroup.Item>
             </React.Fragment>

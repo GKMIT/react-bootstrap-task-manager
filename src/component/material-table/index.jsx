@@ -1,8 +1,12 @@
 import React from "react";
+import { Button } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import { crudService } from '../../_services';
 import { alertActions } from '../../_actions';
 import { connect } from 'react-redux';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 class BootDataTable extends React.PureComponent {
 
@@ -63,6 +67,14 @@ class BootDataTable extends React.PureComponent {
         this.getData()
     }
 
+    actionRender = () => {
+        return (
+            <Button onClick={() => this.props.addData()} >
+                <FontAwesomeIcon icon={faPlus} />
+            </Button>
+        )
+    }
+
     render() {
         const { columns, data, totalRows } = this.state
 
@@ -73,6 +85,7 @@ class BootDataTable extends React.PureComponent {
                     title={this.props.title}
                     columns={columns}
                     data={data}
+                    actions={this.actionRender()}
                     pagination
                     paginationServer
                     paginationTotalRows={totalRows}
