@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Form from 'react-bootstrap/Form';
 class MuiCheckBox extends React.Component {
 
     handleChange = (e, index) => {
@@ -11,22 +11,20 @@ class MuiCheckBox extends React.Component {
         const { name, label, value, required, fullWidth, helperText, index } = this.props
         return (
             <React.Fragment>
-                {/* <FormControl
-                    error={helperText ? true : false}
-                    fullWidth={fullWidth}
-                >
-                    <FormGroup aria-label="position" row>
-                        <FormControlLabel
-                            checked={value ? true : false}
-                            name={name}
-                            control={<Checkbox color="primary" required={required} />}
-                            label={label}
-                            labelPlacement="end"
-                            onChange={e => this.handleChange(e, index)}
-                        />
-                    </FormGroup>
-                    {helperText && <FormHelperText>{helperText}</FormHelperText>}
-                </FormControl> */}
+                <Form.Group>
+                    <Form.Label>{label}</Form.Label>
+                    <Form.Check
+                        type="checkbox"   
+                        checked={value ? true : false}
+                        name={name}                     
+                        label={label}
+                        required={required}
+                        onChange={e => this.handleChange(e, index)}
+                    />
+                    <Form.Text className="text-muted" type="valid">
+                        {helperText}
+                    </Form.Text>
+                </Form.Group>                
             </React.Fragment>
         )
 

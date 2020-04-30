@@ -4,7 +4,7 @@ import { crudService } from '../../_services';
 import { alertActions } from '../../_actions';
 import { connect } from 'react-redux';
 
-class MaterialDataTable extends React.PureComponent {
+class BootDataTable extends React.PureComponent {
 
     constructor(props) {
         super(props)
@@ -88,4 +88,4 @@ const actionCreators = {
     showError: alertActions.error,
 }
 
-export default connect(null, actionCreators)(MaterialDataTable);
+export default connect(null, actionCreators)(BootDataTable);

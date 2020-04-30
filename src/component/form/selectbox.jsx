@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import Form from 'react-bootstrap/Form';
 class MuiSelectBox extends React.Component {
 
     handleChange = (e, index) => {
@@ -12,29 +12,22 @@ class MuiSelectBox extends React.Component {
         const { name, label, value, required, fullWidth, options, helperText, index } = this.props
         return (
             <React.Fragment>
-                {/* <FormControl
-                    error={helperText ? true : false}
-                    fullWidth={fullWidth}
-                >
-
-                    <InputLabel>{label}</InputLabel>
-
-                    <Select
-                        name={name}
+                <Form.Group>
+                    <Form.Label>{label}</Form.Label>
+                    <Form.Control as="select"
                         required={required}
+                        name={name}
                         value={value}
-                        onChange={e => this.handleChange(e, index)}
-                        inputProps={{
-                            name: name,
-                        }}
-                    >
+                        onChange={e => this.handleChange(e, index)}>
                         {options && options.map(option => {
-                            return (<MenuItem key={option.id} value={option.id}>{option.name}</MenuItem>)
+                            return (
+                                <option key={option.id} value={option.id}>{option.name}</option>)
                         })}
-                    </Select>
-
-                    {helperText && <FormHelperText>{helperText}</FormHelperText>}
-                </FormControl> */}
+                    </Form.Control>
+                    <Form.Text className="text-muted" type="valid">
+                        {helperText}
+                    </Form.Text>
+                </Form.Group>
             </React.Fragment>
         )
 

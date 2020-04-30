@@ -11,11 +11,11 @@ class Copyright extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/* <Typography variant="body2" color="textSecondary" align="center">
+                <p>
                     All rights reserved
-                    {' '}<Link color="inherit" href="#">{appTitle}</Link>{' '}
+                    {' '}<a color="inherit" href="#">{appTitle}</a>{' '}
                     &copy; {this.showCurrentYear()}
-                </Typography> */}
+                </p>
             </React.Fragment>
         )
 

@@ -2,13 +2,13 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import SimpleReactValidator from 'simple-react-validator';
 
-import MuiTextBox from './textbox'
-import MuiCheckBox from './checkbox'
-import MuiPassTextBox from './password'
-import MuiSelectBox from './selectbox'
-import MuiMultiSelectBox from './multiselectbox'
-import MuiDatePicker from './date'
-import MuiTimePicker from './time'
+import TextBox from './textbox'
+import CheckBox from './checkbox'
+import PassTextBox from './password'
+import SelectBox from './selectbox'
+import MultiSelectBox from './multiselectbox'
+import DatePicker from './date'
+import TimePicker from './time'
 
 class MuiForm extends React.Component {
     constructor() {
@@ -44,7 +44,7 @@ class MuiForm extends React.Component {
                         switch (form.type) {
                             case 'select':
                                 return (
-                                    <MuiSelectBox
+                                    <SelectBox
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
@@ -59,7 +59,7 @@ class MuiForm extends React.Component {
                                 )
                             case 'multiselect':
                                 return (
-                                    <MuiMultiSelectBox
+                                    <MultiSelectBox
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
@@ -74,7 +74,7 @@ class MuiForm extends React.Component {
                                 )
                             case 'password':
                                 return (
-                                    <MuiPassTextBox
+                                    <PassTextBox
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
@@ -88,7 +88,7 @@ class MuiForm extends React.Component {
                                 )
                             case 'checkbox':
                                 return (
-                                    <MuiCheckBox
+                                    <CheckBox
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
@@ -103,7 +103,7 @@ class MuiForm extends React.Component {
 
                             case 'date':
                                 return (
-                                    <MuiDatePicker
+                                    <DatePicker
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
@@ -119,7 +119,7 @@ class MuiForm extends React.Component {
                                 )
                             case 'time':
                                 return (
-                                    <MuiTimePicker
+                                    <TimePicker
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
@@ -136,7 +136,7 @@ class MuiForm extends React.Component {
 
                             default:
                                 return (
-                                    <MuiTextBox
+                                    <TextBox
                                         label={form.label}
                                         name={form.name}
                                         type={form.type}
