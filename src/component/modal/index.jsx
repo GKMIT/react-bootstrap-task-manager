@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { modalActions } from '../../_actions';
-
+import { Modal } from 'react-bootstrap';
 class MuiModal extends React.Component {
     handleClose = () => {
         this.props.closeModal();
@@ -10,20 +10,14 @@ class MuiModal extends React.Component {
     render() {
         const { open } = this.props
         return (
-
-            <div>
-                {/* <Dialog
-                open={open}
-                onClose={this.handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                {this.props.modal.title && <DialogTitle id="alert-dialog-title">{this.props.modal.title}</DialogTitle>}
-                <DialogContent>
+            <Modal show={open} onHide={this.handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>{this.props.modal.title}</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
                     {this.props.modal.component}
-                </DialogContent>
-            </Dialog> */}
-            </div>
+                </Modal.Body>
+            </Modal>
         )
     }
 }

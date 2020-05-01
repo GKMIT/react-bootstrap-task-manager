@@ -34,7 +34,7 @@ class MuiForm extends React.Component {
     }
 
     render() {
-        const { formFields, classes, submitText, submitFullWidth, fullWidth } = this.props
+        const { formFields, submitText, submitFullWidth, fullWidth } = this.props
         return (
             <React.Fragment>
                 <form noValidate onSubmit={this.handleSubmit}>
@@ -157,7 +157,7 @@ class MuiForm extends React.Component {
 
                     <Button
                         type="submit"
-                        fullWidth={submitFullWidth}                        
+                        fullWidth={submitFullWidth}
                         variant="primary"
                     >
                         {submitText}

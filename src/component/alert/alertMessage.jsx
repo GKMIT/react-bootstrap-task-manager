@@ -1,12 +1,17 @@
 import React from 'react';
-import { Alert } from 'react-bootstrap';
-
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 export default function SimpleAlert(props) {
 
     return (
-        <Alert variant={props.type} onClose={props.handleClose} dismissible>
+        <SweetAlert
+            success={props.type === 'success'}
+            warning={props.type === 'warning'}
+            error={props.type === 'error'}
+            info={props.type === 'info'}
+            onConfirm={props.handleClose}
+        >
             {props.message}
-        </Alert>
+        </SweetAlert>
     );
 }

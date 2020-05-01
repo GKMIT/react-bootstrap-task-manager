@@ -31,7 +31,7 @@ function _getAll(type, filterData) {
             page: filterData.page,
             pageSize: filterData.pageSize,
             search: filterData.search,
-            orderBy: filterData.orderBy ? filterData.orderBy.field : null,
+            orderBy: filterData.orderBy,
             orderDirection: filterData.orderDirection,
             filters: JSON.stringify(filters),
         }

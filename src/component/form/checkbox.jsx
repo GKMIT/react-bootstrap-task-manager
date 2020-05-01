@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-class MuiCheckBox extends React.Component {
+class CheckBox extends React.Component {
 
     handleChange = (e, index) => {
         e.persist()
@@ -31,4 +31,4 @@ class MuiCheckBox extends React.Component {
     }
 }
 
-export default MuiCheckBox;
+export default CheckBox;

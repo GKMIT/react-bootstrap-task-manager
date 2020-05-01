@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 
-class MuiTextBox extends React.Component {
+class TextBox extends React.Component {
 
     handleChange = (e, index) => {
         e.persist()
@@ -10,11 +10,11 @@ class MuiTextBox extends React.Component {
     }
 
     render() {
-        const { name, type, label, value, required, inputAdornmentPosition, icon, fullWidth, helperText, multiline, rowsMax, index } = this.props
+        const { name, type, label, value, required, helperText, multiline, rowsMax, index } = this.props
         return (
             <React.Fragment>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>{label}</Form.Label>
+                <Form.Group>
+                    {label && <Form.Label>{label}</Form.Label>}
                     <Form.Control
                         as={multiline ? "textarea" : "input"}
                         placeholder={label}
@@ -36,17 +36,17 @@ class MuiTextBox extends React.Component {
     }
 }
 
-MuiTextBox.propTypes = {
+TextBox.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired
 };
 
-MuiTextBox.defaultProps = {
+TextBox.defaultProps = {
     name: "",
     label: "",
     value: "",
     inputAdornmentPosition: 'end'
 }
 
-export default MuiTextBox;
+export default TextBox;

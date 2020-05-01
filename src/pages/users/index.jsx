@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { crudActions, confirmActions } from '../../_actions';
 
-import { TableAction } from '../../component/material-table/tableAction'
-import MaterialDataTable from '../../component/material-table'
+import { TableAction } from '../../component/data-table/tableAction'
+import MaterialDataTable from '../../component/data-table'
 
 const title = 'User List'
 class List extends React.Component {
@@ -20,7 +20,7 @@ class List extends React.Component {
             this.props.clearConfirm();
         }
     }
-    
+
     deleteData = (id) => {
         this.props.deleteCrud('users', 'users', id);
     }
@@ -45,19 +45,23 @@ class List extends React.Component {
         const columns = []
         columns.push({
             name: "Name",
-            selector: "name"
+            selector: "name",
+            sortable: true,
         })
         columns.push({
             name: "Mobile",
-            selector: "mobile"
+            selector: "mobile",
+            sortable: true,
         })
         columns.push({
             name: "Email",
-            selector: "email"
+            selector: "email",
+            sortable: true,
         })
         columns.push({
             name: "DOB",
-            selector: "dob"
+            selector: "dob",
+            sortable: true,
         })
         if (this.deleteCrud && this.editCrud) {
             columns.push(TableAction(this.deleteCrud, this.editCrud))

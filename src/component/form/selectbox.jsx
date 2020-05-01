@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
-class MuiSelectBox extends React.Component {
+class SelectBox extends React.Component {
 
     handleChange = (e, index) => {
         e.persist()
@@ -9,7 +9,7 @@ class MuiSelectBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, fullWidth, options, helperText, index } = this.props
+        const { name, label, value, required, options, helperText, index } = this.props
         return (
             <React.Fragment>
                 <Form.Group>
@@ -19,6 +19,7 @@ class MuiSelectBox extends React.Component {
                         name={name}
                         value={value}
                         onChange={e => this.handleChange(e, index)}>
+                        <option>---select---</option>
                         {options && options.map(option => {
                             return (
                                 <option key={option.id} value={option.id}>{option.name}</option>)
@@ -34,17 +35,16 @@ class MuiSelectBox extends React.Component {
     }
 }
 
-MuiSelectBox.propTypes = {
+SelectBox.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired
 };
 
-MuiSelectBox.defaultProps = {
+SelectBox.defaultProps = {
     name: "",
     label: "",
     value: "",
-    inputAdornmentPosition: 'end'
 }
 
-export default MuiSelectBox;
+export default SelectBox;

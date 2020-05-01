@@ -1,84 +1,68 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Select from 'react-select';
+import Form from 'react-bootstrap/Form';
+class MultiSelectBox extends React.Component {
 
-class MuiMultiSelectBox extends React.Component {
-
-    handleChange = (e, index) => {
-        e.persist()
-        this.props.handleChange(e.target.value, e.target.name, index)
+    handleChange = (data, name, index) => {
+        const finalData = data.map(value => value.value)
+        this.props.handleChange(finalData, name, index)
     }
 
     render() {
         const { name, label, value, required, fullWidth, options, helperText, index } = this.props
 
         let selected = []
+        let items = []
         if (options && options.length) {
             options.map(option => {
                 if (value.includes(option.id) === true) {
-                    selected.push(option.name)
+                    selected.push({
+                        value: option.id,
+                        label: option.name,
+                    })
                 }
+
+                items.push({
+                    value: option.id,
+                    label: option.name,
+                })
                 return null
             })
         }
 
         return (
             <React.Fragment>
-                {/* <FormControl
-                    error={helperText ? true : false}
-                    fullWidth={fullWidth}
-                >
-
-                    <InputLabel>{label}</InputLabel>
-
+                <Form.Group>
+                    <Form.Label>{label}</Form.Label>
                     <Select
                         name={name}
-                        required={required}
-                        value={value}
-                        multiple
-                        displayEmpty={true}
-                        renderValue={renderItem => {
-                            if (selected) {
-                                return selected.join(', ')
-                            }
-                            return renderItem.join(',')
-                        }}
-                        onChange={e => this.handleChange(e, index)}
-                        inputProps={{
-                            name: name,
-                        }}
-                    >
-                        {options && options.map(option => {
-                            return (
-                                <MenuItem
-                                    key={option.id}                                    
-                                    value={option.id}
-                                >
-                                    <Checkbox checked={value.indexOf(option.id) > -1} />
-                                    {option.name}
-                                </MenuItem>
-                            )
-                        })}
-                    </Select>
-
-                    {helperText && <FormHelperText>{helperText}</FormHelperText>}
-                </FormControl> */}
+                        value={selected}
+                        isMulti
+                        onChange={e => this.handleChange(e, name, index)}
+                        options={items}
+                    />
+                    <Form.Text className="text-muted" type="valid">
+                        {helperText}
+                    </Form.Text>
+                </Form.Group>
             </React.Fragment >
         )
 
     }
 }
 
-MuiMultiSelectBox.propTypes = {
+MultiSelectBox.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired
 };
 
-MuiMultiSelectBox.defaultProps = {
+MultiSelectBox.defaultProps = {
     name: "",
     label: "",
     value: "",
     inputAdornmentPosition: 'end'
 }
 
-export default MuiMultiSelectBox;
+export default MultiSelectBox;
