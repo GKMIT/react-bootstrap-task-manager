@@ -1,6 +1,6 @@
 # React task manager application
 
-This is the task manager application build in React + Material UI.
+This is the task manager application build in React + Bootstrap.
 
 ## Dependency
 
