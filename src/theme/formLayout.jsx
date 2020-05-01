@@ -7,7 +7,7 @@ class FormLayout extends React.Component {
         return (
             <Container>
                 <Row>
-                    <Col md={{ span: 6, offset: 3 }}>
+                    <Col md={fullWidth ? 12 : { span: 6, offset: 3 }}>
                         <h1>{title}</h1>
                         {this.props.children}
                     </Col>
