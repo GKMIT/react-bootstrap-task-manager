@@ -20,34 +20,26 @@ class Layout extends React.Component {
         super()
         this.state = {
             sidebarDocked: mql.matches,
-            sidebarOpen: false
+            sidebarOpen: mql.matches
         }
 
-        this.mediaQueryChanged = this.mediaQueryChanged.bind(this);
         this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     }
 
-    componentWillMount() {
-        mql.addListener(this.mediaQueryChanged);
-    }
-
-    componentWillUnmount() {
-        this.state.mql.removeListener(this.mediaQueryChanged);
-    }
 
     onSetSidebarOpen() {
         const { sidebarOpen } = this.state
         this.setState({ sidebarOpen: !sidebarOpen });
-    }
-
-    mediaQueryChanged() {
-        this.setState({ sidebarDocked: mql.matches, sidebarOpen: false });
+        if (mql.matches) {
+            this.setState({ sidebarDocked: !sidebarOpen });
+        }
     }
 
 
     render() {
         const { sidebarOpen, sidebarDocked } = this.state
-
+        console.log(sidebarOpen)
+        console.log(sidebarDocked)
         return (
             <React.Fragment>
                 <Sidebar
@@ -61,7 +53,7 @@ class Layout extends React.Component {
 
 
                         <Loader open={this.props.loader} />
-                        
+
 
                         {this.props.modal.open && <Modal open={this.props.modal.open} />}
 
