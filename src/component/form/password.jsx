@@ -6,7 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
 
-class MuiPassTextBox extends React.Component {
+class PassTextBox extends React.Component {
     constructor() {
         super()
         this.state = {
@@ -61,17 +61,17 @@ class MuiPassTextBox extends React.Component {
     }
 }
 
-MuiPassTextBox.propTypes = {
+PassTextBox.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     value: PropTypes.any.isRequired
 };
 
-MuiPassTextBox.defaultProps = {
+PassTextBox.defaultProps = {
     name: "",
     label: "",
     value: "",
     inputAdornmentPosition: 'end'
 }
 
-export default MuiPassTextBox;
+export default PassTextBox;
