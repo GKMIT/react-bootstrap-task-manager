@@ -4,6 +4,7 @@ import DataTable from 'react-data-table-component';
 import { crudService } from '../../_services';
 import { alertActions } from '../../_actions';
 import { connect } from 'react-redux';
+import TextBox from '../../component/form/textbox';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faRecycle } from '@fortawesome/free-solid-svg-icons'
@@ -20,7 +21,8 @@ class BootDataTable extends React.PureComponent {
             perPage: 10,
             page: 1,
             orderBy: 'id',
-            orderDirection: 'asc'
+            orderDirection: 'asc',
+            search: ''
         }
     }
 
@@ -38,6 +40,7 @@ class BootDataTable extends React.PureComponent {
             pageSize: this.state.pageSize,
             orderBy: this.state.orderBy,
             orderDirection: this.state.orderDirection,
+            search: this.state.search,
         }
         const me = this
         crudService._getAll(this.props.url, filter).then(
@@ -75,9 +78,25 @@ class BootDataTable extends React.PureComponent {
         this.getData()
     }
 
+    handleChange = (value) => {
+        this.setState({ search: value })
+        this.getData()
+    }
+
     actionRender = () => {
+        const { search } = this.state
         return (
             <React.Fragment>
+
+                <div style={{ marginTop: 16 }}>
+                    <TextBox
+                        name="search"
+                        type='text'
+                        value={search}
+                        handleChange={this.handleChange}
+                    />
+                </div>
+
                 <Button variant="primary" onClick={() => this.props.addData()} >
                     <FontAwesomeIcon icon={faPlus} />
                 </Button>
