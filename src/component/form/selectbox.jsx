@@ -9,7 +9,7 @@ class SelectBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, fullWidth, options, helperText, index } = this.props
+        const { name, label, value, required, options, helperText, index } = this.props
         return (
             <React.Fragment>
                 <Form.Group>
@@ -19,6 +19,7 @@ class SelectBox extends React.Component {
                         name={name}
                         value={value}
                         onChange={e => this.handleChange(e, index)}>
+                        <option>---select---</option>
                         {options && options.map(option => {
                             return (
                                 <option key={option.id} value={option.id}>{option.name}</option>)
@@ -44,7 +45,6 @@ SelectBox.defaultProps = {
     name: "",
     label: "",
     value: "",
-    inputAdornmentPosition: 'end'
 }
 
 export default SelectBox;
