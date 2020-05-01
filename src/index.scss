@@ -1,0 +1,11 @@
+/* make the customizations */
+$theme-colors: (
+    "info": teal,
+    "danger": tomato
+);
+
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
+
+@import '~@fullcalendar/core/main.css';
+@import '~@fullcalendar/daygrid/main.css';
