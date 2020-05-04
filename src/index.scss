@@ -9,3 +9,10 @@ $theme-colors: (
 
 @import '~@fullcalendar/core/main.css';
 @import '~@fullcalendar/daygrid/main.css';
+
+
+.react-datepicker-wrapper {
+    display: block; 
+    padding: 0;
+    border: 0;
+}

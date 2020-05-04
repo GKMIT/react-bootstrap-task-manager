@@ -1,44 +1,34 @@
 import React from 'react';
-
-class MuiDatePicker extends React.Component {
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Form from 'react-bootstrap/Form';
+class BootDatePicker extends React.Component {
 
     handleChange = (value, name, index) => {
         this.props.handleChange(value, name, index)
     }
 
     render() {
-        const { name, label, value, required, fullWidth, helperText, index, variant, format } = this.props
+        const { name, label, value, helperText, index, format } = this.props
+        const finalValue = new Date(value)
         return (
             <React.Fragment>
-                {/* <FormControl
-                    error={helperText ? true : false}
-                    fullWidth={fullWidth}
-                >
-
-                    <MuiPickersUtilsProvider utils={MomentUtils}>
-                        <KeyboardDatePicker
-                            disableToolbar
-                            variant={variant}
-                            format={format}
-                            margin="normal"
-                            required={required}
-                            label={label}
-                            value={value}
-                            name={name}
-                            onChange={e => this.handleChange(e, name, index)}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                            animateYearScrolling
-                        />
-                    </MuiPickersUtilsProvider>
-
-                    {helperText && <FormHelperText>{helperText}</FormHelperText>}
-                </FormControl> */}
+                <Form.Group>
+                    <Form.Label>{label}</Form.Label>
+                    <DatePicker
+                        className="form-control"
+                        selected={finalValue}
+                        dateFormat={format}
+                        onChange={e => this.handleChange(e, name, index)}
+                    />
+                    <Form.Text className="text-muted" type="valid">
+                        {helperText}
+                    </Form.Text>
+                </Form.Group>
             </React.Fragment>
         )
 
     }
 }
 
-export default MuiDatePicker;
+export default BootDatePicker;
