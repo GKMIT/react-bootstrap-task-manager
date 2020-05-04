@@ -54,7 +54,7 @@ class Form extends React.Component {
             label: 'Start Date',
             type: 'date',
             variant: 'inline',
-            format: 'DD-MM-YYYY',
+            format: 'dd-MM-yyyy',
             value: form.start_date,
             validation: 'required',
         })
@@ -64,7 +64,7 @@ class Form extends React.Component {
             label: 'Start Time',
             type: 'time',
             variant: 'inline',
-            format: 'hh:mm A',
+            format: 'hh:mm aa',
             value: form.start_time,
             validation: 'required',
         })
@@ -74,7 +74,7 @@ class Form extends React.Component {
             label: 'End Date',
             type: 'date',
             variant: 'inline',
-            format: 'DD-MM-YYYY',
+            format: 'dd-MM-yyyy',
             value: form.end_date,
             validation: 'required',
         })
@@ -84,7 +84,7 @@ class Form extends React.Component {
             label: 'End Time',
             type: 'time',
             variant: 'inline',
-            format: 'hh:mm A',
+            format: 'hh:mm aa',
             value: form.end_time,
             validation: 'required',
         })
