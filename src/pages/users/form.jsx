@@ -19,7 +19,7 @@ class Form extends React.Component {
                 name: '',
                 mobile: '',
                 email: '',
-                dob: ''
+                dob: new Date()
             },
         }
     }
@@ -69,7 +69,7 @@ class Form extends React.Component {
             label: 'Dob',
             type: 'date',
             variant: 'inline',
-            format: 'DD-MM-YYYY',
+            format: 'dd-MM-yyyy',
             value: form.dob,
             validation: 'required',
         })
