@@ -1,15 +1,14 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button';
+import { Button, Tabs, Tab } from 'react-bootstrap';
 import SimpleReactValidator from 'simple-react-validator';
 
-
-import MuiTextBox from './textbox'
-import MuiCheckBox from './checkbox'
-import MuiPassTextBox from './password'
-import MuiSelectBox from './selectbox'
-import MuiMultiSelectBox from './multiselectbox'
-import MuiDatePicker from './date'
-import MuiTimePicker from './time'
+import TextBox from './textbox'
+import CheckBox from './checkbox'
+import PassTextBox from './password'
+import SelectBox from './selectbox'
+import MultiSelectBox from './multiselectbox'
+import DatePicker from './date'
+import TimePicker from './time'
 
 class MuiForm extends React.Component {
     constructor() {
@@ -101,24 +100,16 @@ class MuiForm extends React.Component {
     };
 
     confirmPanel = () => {
-        const { classes, submitText, submitFullWidth } = this.props
+        const { submitText } = this.props
         return (
             <React.Fragment>
-                {/* <Typography className={classes.stepWrapper}>
-                    All steps completed - you&apos;re finished
-                </Typography>
-                <Button onClick={this.handleReset} className={classes.button}>
+                <p>All steps completed - you&apos;re finished</p>
+                <Button variant="secondary" onClick={this.handleReset}>
                     Reset
                 </Button>
-                <Button
-                    type="submit"
-                    fullWidth={submitFullWidth}
-                    variant="contained"
-                    color="primary"
-                    className={classes.submit}
-                >
+                <Button type="submit" variant="primary">
                     {submitText}
-                </Button> */}
+                </Button>
             </React.Fragment>
         )
     }
@@ -139,189 +130,153 @@ class MuiForm extends React.Component {
 
     render() {
         const { activeStep } = this.state
-        const { steps, classes, fullWidth } = this.props
+        const { steps } = this.props
         console.warn('steps', steps)
+        console.warn('activeStep', activeStep)
         return (
             <React.Fragment>
-                <form className={classes.form} noValidate onSubmit={this.handleSubmit}>
+                <form noValidate onSubmit={this.handleSubmit}>
 
-                    {/* <Stepper activeStep={activeStep}>
-                        {steps.map((step, index) => {
-                            const stepProps = {};
-                            const labelProps = {};
-
-                            if (step.optional) {
-                                labelProps.optional = <Typography variant="caption">Optional</Typography>;
-                            }
-
-                            if (this.isStepSkipped(index)) {
-                                stepProps.completed = false;
-                            }
-
+                    <Tabs activeKey={activeStep}>
+                        {steps.map((step, stepIndex) => {
                             return (
-                                <Step key={step.label} {...stepProps}>
-                                    <StepLabel {...labelProps}>{step.label}</StepLabel>
-                                </Step>
-                            );
-                        })}
-                    </Stepper> */}
+                                <Tab eventKey={stepIndex} title={step.label}>
 
+                                    {step.formFields.map((form, index) => {
+                                        switch (form.type) {
+                                            case 'select':
+                                                return (
+                                                    <SelectBox
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        required={form.required}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        options={form.options}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+                                            case 'multiselect':
+                                                return (
+                                                    <MultiSelectBox
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        required={form.required}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        options={form.options}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+                                            case 'password':
+                                                return (
+                                                    <PassTextBox
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        required={form.required}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+                                            case 'checkbox':
+                                                return (
+                                                    <CheckBox
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        required={form.required}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+
+                                            case 'date':
+                                                return (
+                                                    <DatePicker
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        required={form.required}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        variant={form.variant}
+                                                        format={form.format}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+                                            case 'time':
+                                                return (
+                                                    <TimePicker
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        required={form.required}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        variant={form.variant}
+                                                        format={form.format}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+
+                                            default:
+                                                return (
+                                                    <TextBox
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        type={form.type}
+                                                        icon={form.icon}
+                                                        multiline={form.multiline}
+                                                        rowsMax={form.rowsMax}
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        handleChange={this.handleChange}
+                                                    />
+                                                )
+                                        }
+                                    })}
+                                </Tab>
+                            )
+                        })}
+                    </Tabs>
 
                     <div>
                         {activeStep === steps.length ? (
                             this.confirmPanel()
                         ) : (
                                 <div>
-                                    {/* start process form */}
-                                    {steps.map((step, index) => {
-                                        if (index === activeStep) {
-                                            return (
-                                                step.formFields.map((form, index) => {
-                                                    switch (form.type) {
-                                                        case 'select':
-                                                            return (
-                                                                <MuiSelectBox
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    required={form.required}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    options={form.options}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-                                                        case 'multiselect':
-                                                            return (
-                                                                <MuiMultiSelectBox
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    required={form.required}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    options={form.options}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-                                                        case 'password':
-                                                            return (
-                                                                <MuiPassTextBox
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    required={form.required}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-                                                        case 'checkbox':
-                                                            return (
-                                                                <MuiCheckBox
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    required={form.required}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-
-                                                        case 'date':
-                                                            return (
-                                                                <MuiDatePicker
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    required={form.required}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    variant={form.variant}
-                                                                    format={form.format}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-                                                        case 'time':
-                                                            return (
-                                                                <MuiTimePicker
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    required={form.required}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    variant={form.variant}
-                                                                    format={form.format}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-
-                                                        default:
-                                                            return (
-                                                                <MuiTextBox
-                                                                    label={form.label}
-                                                                    name={form.name}
-                                                                    type={form.type}
-                                                                    icon={form.icon}
-                                                                    multiline={form.multiline}
-                                                                    rowsMax={form.rowsMax}
-                                                                    fullWidth={fullWidth}
-                                                                    helperText={this.validator.message(form.name, form.value, form.validation)}
-                                                                    index={index}
-                                                                    key={index}
-                                                                    value={form.value}
-                                                                    handleChange={this.handleChange}
-                                                                />
-                                                            )
-                                                    }
-                                                })
-                                            )
-                                        }
-                                        return ''
-                                    })}
-                                    {/* end process form */}
-
-                                    {/* process buttons */}
                                     <div className="stepButtonWrapper">
-                                        <Button disabled={activeStep === 0} onClick={this.handleBack} className="button">
+                                        <Button disabled={activeStep === 0} onClick={this.handleBack} variant="secondary">
                                             Back
                                         </Button>
 
                                         {this.isStepOptional(activeStep) && (
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                onClick={this.handleSkip}
-                                                className="button"
-                                            >
+                                            <Button variant="primary" onClick={this.handleSkip}>
                                                 Skip
                                             </Button>
                                         )}
 
                                         <Button
-                                            variant="contained"
-                                            color="primary"
+                                            variant="primary"
                                             onClick={this.handleNext}
-                                            className="button"
                                         >
                                             {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                                         </Button>
                                     </div>
-                                    {/* end process buttons */}
+
                                 </div>
                             )}
                     </div>

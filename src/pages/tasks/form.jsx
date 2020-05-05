@@ -33,8 +33,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'user_id',
             label: 'User',
-            type: 'select',
-            icon: '',
+            type: 'select',            
             value: form.user_id,
             options: users,
             validation: 'required',
@@ -43,8 +42,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'name',
             label: 'Name',
-            type: 'text',
-            icon: '',
+            type: 'text',            
             value: form.name,
             validation: 'required',
         })
@@ -93,8 +91,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'details',
             label: 'Details',
-            type: 'text',
-            icon: '',
+            type: 'text',            
             value: form.details,
             validation: 'required',
         })

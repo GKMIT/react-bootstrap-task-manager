@@ -27,7 +27,7 @@ class PassTextBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, helperText, index } = this.props
+        const { name, label, value, helperText, index } = this.props
         const { showPassword } = this.state
         return (
             <React.Fragment>
@@ -36,10 +36,11 @@ class PassTextBox extends React.Component {
 
                     <InputGroup className="mb-3">
                         <Form.Control
+                            isValid={value && !helperText}
+                            isInvalid={helperText}
                             name={name}
                             placeholder={label}
                             type={showPassword ? 'text' : 'password'}
-                            required={required}
                             value={value}
                             onChange={e => this.handleChange(e, index)}
                         />
@@ -48,11 +49,13 @@ class PassTextBox extends React.Component {
                                 <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                             </Button>
                         </InputGroup.Append>
+
+                        <Form.Control.Feedback type="invalid">
+                            {helperText}
+                        </Form.Control.Feedback>
                     </InputGroup>
 
-                    <Form.Text className="text-muted" type="valid">
-                        {helperText}
-                    </Form.Text>
+
                 </Form.Group>
 
             </React.Fragment>

@@ -33,7 +33,6 @@ class Form extends React.Component {
             name: 'role_id',
             label: 'Role',
             type: 'select',
-            icon: '',
             value: form.role_id,
             options: roles,
             validation: 'required',
@@ -43,7 +42,6 @@ class Form extends React.Component {
             name: 'name',
             label: 'Name',
             type: 'text',
-            icon: 'person',
             value: form.name,
             validation: 'required',
         })
@@ -51,7 +49,6 @@ class Form extends React.Component {
             name: 'mobile',
             label: 'mobile',
             type: 'text',
-            icon: 'call',
             value: form.mobile,
             validation: 'required',
         })
@@ -60,7 +57,6 @@ class Form extends React.Component {
             name: 'email',
             label: 'Email',
             type: 'email',
-            icon: 'mail',
             value: form.email,
             validation: 'required|email',
         })

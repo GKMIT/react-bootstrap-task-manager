@@ -10,7 +10,7 @@ class MultiSelectBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, fullWidth, options, helperText, index } = this.props
+        const { name, label, value, options, helperText, index } = this.props
 
         let selected = []
         let items = []
@@ -42,9 +42,10 @@ class MultiSelectBox extends React.Component {
                         onChange={e => this.handleChange(e, name, index)}
                         options={items}
                     />
-                    <Form.Text className="text-muted" type="valid">
+                    <div className="is-invalid"></div>
+                    <div className="invalid-feedback">
                         {helperText}
-                    </Form.Text>
+                    </div>
                 </Form.Group>
             </React.Fragment >
         )

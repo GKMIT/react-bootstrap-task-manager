@@ -2,7 +2,7 @@ import React from 'react';
 import MuiForm from '../../component/form/stepper'
 
 import { connect } from 'react-redux';
-import { crudActions, alertActions,modalActions } from '../../_actions';
+import { crudActions, alertActions, modalActions } from '../../_actions';
 
 class Form extends React.Component {
 
@@ -16,9 +16,9 @@ class Form extends React.Component {
             form: {
                 user_id: '',
                 name: '',
-                start_date: this.props.start_date,
+                start_date: new Date(this.props.start_date),
                 start_time: new Date(),
-                end_date: this.props.end_date,
+                end_date: new Date(this.props.end_date),
                 end_time: new Date(),
                 details: ''
             },
@@ -26,7 +26,7 @@ class Form extends React.Component {
     }
 
     createForm = () => {
-        const { form } = this.state        
+        const { form } = this.state
         const { users } = this.props
         let steps = []
 
@@ -36,8 +36,7 @@ class Form extends React.Component {
                 {
                     name: 'user_id',
                     label: 'User',
-                    type: 'select',
-                    icon: '',
+                    type: 'select',                    
                     value: form.user_id,
                     options: users,
                     validation: 'required',
@@ -52,16 +51,14 @@ class Form extends React.Component {
                 {
                     name: 'name',
                     label: 'Name',
-                    type: 'text',
-                    icon: '',
+                    type: 'text',                    
                     value: form.name,
                     validation: 'required',
                 },
                 {
                     name: 'details',
                     label: 'Details',
-                    type: 'text',
-                    icon: '',
+                    type: 'text',                    
                     value: form.details,
                     validation: 'min:1',
                 }
@@ -76,7 +73,7 @@ class Form extends React.Component {
                     label: 'Start Date',
                     type: 'date',
                     variant: 'inline',
-                    format: 'DD-MM-YYYY',
+                    format: 'dd-MM-yyyy',
                     value: form.start_date,
                     validation: 'required',
                 },
@@ -85,7 +82,7 @@ class Form extends React.Component {
                     label: 'Start Time',
                     type: 'time',
                     variant: 'inline',
-                    format: 'hh:mm A',
+                    format: 'hh:mm aa',
                     value: form.start_time,
                     validation: 'required',
                 },
@@ -94,7 +91,7 @@ class Form extends React.Component {
                     label: 'End Date',
                     type: 'date',
                     variant: 'inline',
-                    format: 'DD-MM-YYYY',
+                    format: 'dd-MM-yyyy',
                     value: form.end_date,
                     validation: 'required',
                 },
@@ -103,7 +100,7 @@ class Form extends React.Component {
                     label: 'End Time',
                     type: 'time',
                     variant: 'inline',
-                    format: 'hh:mm A',
+                    format: 'hh:mm aa',
                     value: form.end_time,
                     validation: 'required',
                 }
@@ -157,8 +154,8 @@ class Form extends React.Component {
                 this.props.updateData('task', 'tasks', id, formData)
             } else {
                 this.props.createData('task', 'tasks', formData)
-            }      
-            this.props.closeModal();      
+            }
+            this.props.closeModal();
         }
     }
 

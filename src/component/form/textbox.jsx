@@ -10,25 +10,26 @@ class TextBox extends React.Component {
     }
 
     render() {
-        const { name, type, label, value, required, helperText, multiline, rowsMax, index } = this.props
+        const { name, type, label, value, helperText, multiline, rowsMax, index } = this.props
         return (
             <React.Fragment>
                 <Form.Group>
                     {label && <Form.Label>{label}</Form.Label>}
                     <Form.Control
+                        isValid={value && !helperText}
+                        isInvalid={helperText}
                         as={multiline ? "textarea" : "input"}
                         placeholder={label}
                         rows={rowsMax}
                         name={name}
                         type={type}
-                        required={required}
                         value={value}
                         onChange={e => this.handleChange(e, index)}
                     />
 
-                    <Form.Text className="text-muted" type="valid">
+                    <Form.Control.Feedback type="invalid">
                         {helperText}
-                    </Form.Text>
+                    </Form.Control.Feedback>
                 </Form.Group>
             </React.Fragment>
         )
