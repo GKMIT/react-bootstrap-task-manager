@@ -49,11 +49,13 @@ class PassTextBox extends React.Component {
                                 <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                             </Button>
                         </InputGroup.Append>
+
+                        <Form.Control.Feedback type="invalid">
+                            {helperText}
+                        </Form.Control.Feedback>
                     </InputGroup>
 
-                    <Form.Control.Feedback type="invalid">
-                        {helperText}
-                    </Form.Control.Feedback>
+
                 </Form.Group>
 
             </React.Fragment>
