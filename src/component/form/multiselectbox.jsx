@@ -10,7 +10,7 @@ class MultiSelectBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, fullWidth, options, helperText, index } = this.props
+        const { name, label, value, options, helperText, index } = this.props
 
         let selected = []
         let items = []

@@ -10,7 +10,7 @@ class TextBox extends React.Component {
     }
 
     render() {
-        const { name, type, label, value, required, helperText, multiline, rowsMax, index } = this.props
+        const { name, type, label, value, helperText, multiline, rowsMax, index } = this.props
         return (
             <React.Fragment>
                 <Form.Group>
@@ -21,7 +21,6 @@ class TextBox extends React.Component {
                         rows={rowsMax}
                         name={name}
                         type={type}
-                        required={required}
                         value={value}
                         onChange={e => this.handleChange(e, index)}
                     />

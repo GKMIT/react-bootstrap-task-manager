@@ -8,23 +8,22 @@ class CheckBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, fullWidth, helperText, index } = this.props
+        const { name, label, value, helperText, index } = this.props
         return (
             <React.Fragment>
                 <Form.Group>
                     <Form.Label>{label}</Form.Label>
                     <Form.Check
-                        type="checkbox"   
+                        type="checkbox"
                         checked={value ? true : false}
-                        name={name}                     
+                        name={name}
                         label={label}
-                        required={required}
                         onChange={e => this.handleChange(e, index)}
                     />
                     <Form.Text className="text-muted" type="valid">
                         {helperText}
                     </Form.Text>
-                </Form.Group>                
+                </Form.Group>
             </React.Fragment>
         )
 

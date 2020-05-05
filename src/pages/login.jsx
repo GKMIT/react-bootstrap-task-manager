@@ -30,8 +30,7 @@ class Login extends React.Component {
         formFields.push({
             name: 'email',
             label: 'Email',
-            type: 'email',
-            icon: 'mail',
+            type: 'email',            
             value: form.email,
             validation: 'required|email',
         })

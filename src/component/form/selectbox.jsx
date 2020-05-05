@@ -9,13 +9,12 @@ class SelectBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, options, helperText, index } = this.props
+        const { name, label, value, options, helperText, index } = this.props
         return (
             <React.Fragment>
                 <Form.Group>
                     <Form.Label>{label}</Form.Label>
                     <Form.Control as="select"
-                        required={required}
                         name={name}
                         value={value}
                         onChange={e => this.handleChange(e, index)}>

@@ -28,8 +28,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'code',
             label: 'Code',
-            type: 'text',
-            icon: '',
+            type: 'text',            
             value: form.code,
             validation: 'required',
         })

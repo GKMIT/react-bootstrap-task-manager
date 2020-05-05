@@ -29,7 +29,6 @@ class Form extends React.Component {
             name: 'name',
             label: 'Name',
             type: 'text',
-            icon: '',
             value: form.name,
             validation: 'required',
         })
@@ -38,7 +37,6 @@ class Form extends React.Component {
             name: 'permissions',
             label: 'Permissions',
             type: 'multiselect',
-            icon: '',
             value: form.permissions,
             options: permissions,
             validation: 'required',

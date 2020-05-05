@@ -27,7 +27,7 @@ class PassTextBox extends React.Component {
     }
 
     render() {
-        const { name, label, value, required, helperText, index } = this.props
+        const { name, label, value, helperText, index } = this.props
         const { showPassword } = this.state
         return (
             <React.Fragment>
@@ -38,8 +38,7 @@ class PassTextBox extends React.Component {
                         <Form.Control
                             name={name}
                             placeholder={label}
-                            type={showPassword ? 'text' : 'password'}
-                            required={required}
+                            type={showPassword ? 'text' : 'password'}                            
                             value={value}
                             onChange={e => this.handleChange(e, index)}
                         />
