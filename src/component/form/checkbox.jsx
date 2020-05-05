@@ -14,15 +14,17 @@ class CheckBox extends React.Component {
                 <Form.Group>
                     <Form.Label>{label}</Form.Label>
                     <Form.Check
+                        isValid={value && !helperText}
+                        isInvalid={helperText}
                         type="checkbox"
                         checked={value ? true : false}
                         name={name}
                         label={label}
                         onChange={e => this.handleChange(e, index)}
                     />
-                    <Form.Text className="text-muted" type="valid">
+                    <Form.Control.Feedback type="invalid">
                         {helperText}
-                    </Form.Text>
+                    </Form.Control.Feedback>
                 </Form.Group>
             </React.Fragment>
         )

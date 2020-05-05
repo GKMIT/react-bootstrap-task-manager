@@ -36,9 +36,11 @@ class PassTextBox extends React.Component {
 
                     <InputGroup className="mb-3">
                         <Form.Control
+                            isValid={value && !helperText}
+                            isInvalid={helperText}
                             name={name}
                             placeholder={label}
-                            type={showPassword ? 'text' : 'password'}                            
+                            type={showPassword ? 'text' : 'password'}
                             value={value}
                             onChange={e => this.handleChange(e, index)}
                         />
@@ -49,9 +51,9 @@ class PassTextBox extends React.Component {
                         </InputGroup.Append>
                     </InputGroup>
 
-                    <Form.Text className="text-muted" type="valid">
+                    <Form.Control.Feedback type="invalid">
                         {helperText}
-                    </Form.Text>
+                    </Form.Control.Feedback>
                 </Form.Group>
 
             </React.Fragment>

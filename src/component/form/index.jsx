@@ -20,7 +20,10 @@ class MuiForm extends React.Component {
     }
 
     handleChange = (value, index) => {
+        console.log(index)
         this.props.handleChange(value, index)
+        this.validator.showMessageFor(index);
+        this.forceUpdate();
     }
 
     handleSubmit = (event) => {

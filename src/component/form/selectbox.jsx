@@ -14,7 +14,10 @@ class SelectBox extends React.Component {
             <React.Fragment>
                 <Form.Group>
                     <Form.Label>{label}</Form.Label>
-                    <Form.Control as="select"
+                    <Form.Control
+                        isValid={value && !helperText}
+                        isInvalid={helperText}
+                        as="select"
                         name={name}
                         value={value}
                         onChange={e => this.handleChange(e, index)}>
@@ -24,9 +27,9 @@ class SelectBox extends React.Component {
                                 <option key={option.id} value={option.id}>{option.name}</option>)
                         })}
                     </Form.Control>
-                    <Form.Text className="text-muted" type="valid">
+                    <Form.Control.Feedback type="invalid">
                         {helperText}
-                    </Form.Text>
+                    </Form.Control.Feedback>
                 </Form.Group>
             </React.Fragment>
         )

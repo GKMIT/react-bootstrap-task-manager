@@ -16,16 +16,17 @@ class MuiTimePicker extends React.Component {
                 <Form.Group>
                     <Form.Label>{label}</Form.Label>
                     <DatePicker
-                        className="form-control"
+                        className={`form-control ${!helperText ? 'is-valid' : 'is-invalid'}`}
                         selected={finalValue}
                         showTimeSelect
                         showTimeSelectOnly
                         dateFormat={format}
                         onChange={e => this.handleChange(e, name, index)}
                     />
-                    <Form.Text className="text-muted" type="valid">
+                    <div className="is-invalid"></div>
+                    <div className="invalid-feedback">
                         {helperText}
-                    </Form.Text>
+                    </div>
                 </Form.Group>
             </React.Fragment>
         )

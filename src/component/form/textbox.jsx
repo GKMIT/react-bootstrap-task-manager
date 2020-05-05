@@ -16,6 +16,8 @@ class TextBox extends React.Component {
                 <Form.Group>
                     {label && <Form.Label>{label}</Form.Label>}
                     <Form.Control
+                        isValid={value && !helperText}
+                        isInvalid={helperText}
                         as={multiline ? "textarea" : "input"}
                         placeholder={label}
                         rows={rowsMax}
@@ -25,9 +27,9 @@ class TextBox extends React.Component {
                         onChange={e => this.handleChange(e, index)}
                     />
 
-                    <Form.Text className="text-muted" type="valid">
+                    <Form.Control.Feedback type="invalid">
                         {helperText}
-                    </Form.Text>
+                    </Form.Control.Feedback>
                 </Form.Group>
             </React.Fragment>
         )
