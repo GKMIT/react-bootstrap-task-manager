@@ -38,8 +38,7 @@ class Layout extends React.Component {
 
     render() {
         const { sidebarOpen, sidebarDocked } = this.state
-        console.log(sidebarOpen)
-        console.log(sidebarDocked)
+
         return (
             <React.Fragment>
                 <Sidebar
@@ -55,7 +54,7 @@ class Layout extends React.Component {
                         <Loader open={this.props.loader} />
 
 
-                        {this.props.modal.open && <Modal open={this.props.modal.open} />}
+                        {this.props.modal.open && <Modal {...this.props.modal} />}
 
                         {this.props.confirm.show &&
                             <AlertConfirmDialog

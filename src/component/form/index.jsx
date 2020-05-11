@@ -9,6 +9,7 @@ import SelectBox from './selectbox'
 import MultiSelectBox from './multiselectbox'
 import DatePicker from './date'
 import TimePicker from './time'
+import FileField from './file'
 
 class MuiForm extends React.Component {
     constructor() {
@@ -19,11 +20,14 @@ class MuiForm extends React.Component {
         });
     }
 
-    handleChange = (value, index) => {
-        console.log(index)
+    handleChange = (value, index) => {        
         this.props.handleChange(value, index)
         this.validator.showMessageFor(index);
         this.forceUpdate();
+    }
+
+    fileUpload = (file) => {
+        this.props.fileUpload(file)
     }
 
     handleSubmit = (event) => {
@@ -89,6 +93,25 @@ class MuiForm extends React.Component {
                                         handleChange={this.handleChange}
                                     />
                                 )
+
+                            case 'file':
+                                return (
+                                    <FileField
+                                        label={form.label}
+                                        name={form.name}
+                                        type={form.type}
+                                        fullWidth={fullWidth}
+                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                        index={index}
+                                        key={index}
+                                        value={form.value}
+                                        editable={form.editable}
+                                        accept={form.accept}
+                                        handleChange={this.handleChange}
+                                        fileUpload={this.fileUpload}
+                                    />
+                                )
+
                             case 'checkbox':
                                 return (
                                     <CheckBox

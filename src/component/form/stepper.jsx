@@ -9,6 +9,7 @@ import SelectBox from './selectbox'
 import MultiSelectBox from './multiselectbox'
 import DatePicker from './date'
 import TimePicker from './time'
+import FileField from './file'
 
 class MuiForm extends React.Component {
     constructor() {
@@ -118,6 +119,10 @@ class MuiForm extends React.Component {
         this.props.handleChange(value, index)
     }
 
+    fileUpload = (file) => {
+        this.props.fileUpload(file)
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         if (this.validator.allValid()) {
@@ -130,9 +135,7 @@ class MuiForm extends React.Component {
 
     render() {
         const { activeStep } = this.state
-        const { steps } = this.props
-        console.warn('steps', steps)
-        console.warn('activeStep', activeStep)
+        const { steps } = this.props        
         return (
             <React.Fragment>
                 <form noValidate onSubmit={this.handleSubmit}>
@@ -183,6 +186,23 @@ class MuiForm extends React.Component {
                                                         key={index}
                                                         value={form.value}
                                                         handleChange={this.handleChange}
+                                                    />
+                                                )
+
+                                            case 'file':
+                                                return (
+                                                    <FileField
+                                                        label={form.label}
+                                                        name={form.name}
+                                                        type={form.type}                                                        
+                                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                                        index={index}
+                                                        key={index}
+                                                        value={form.value}
+                                                        editable={form.editable}
+                                                        accept={form.accept}
+                                                        handleChange={this.handleChange}
+                                                        fileUpload={this.fileUpload}
                                                     />
                                                 )
                                             case 'checkbox':

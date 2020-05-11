@@ -8,13 +8,21 @@ class MuiModal extends React.Component {
     }
 
     render() {
-        const { open } = this.props
+        const { open, width, height } = this.props
+
+        const customContentStyle = {
+            width: `${width}px`,
+            maxWidth: `${width}px`,
+            height: `${height}px`,
+            maxHeight: `${height}px`,
+        };
+
         return (
             <Modal show={open} onHide={this.handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{this.props.modal.title}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body style={customContentStyle}>
                     {this.props.modal.component}
                 </Modal.Body>
             </Modal>
