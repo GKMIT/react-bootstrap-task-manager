@@ -22,7 +22,7 @@ const successHandler = (response) => {
 const errorHandler = (error) => {
     const { response } = error
     if (response.status === 401) {
-        // dispatch(userActions.logout())
+        dispatch(userActions.logout())
     }
     dispatch(alertActions.error(response.statusText))
     return error
