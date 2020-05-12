@@ -45,10 +45,12 @@ class BootDataTable extends React.PureComponent {
         const me = this
         crudService._getAll(this.props.url, filter).then(
             result => {
-                me.setState({
-                    data: result.data.data,
-                    totalRows: Number(result.data.total)
-                })
+                if (result.status === 200) {
+                    me.setState({
+                        data: result.data.data,
+                        totalRows: Number(result.data.total)
+                    })
+                }
             },
             error => {
                 this.props.showError(error.message)
