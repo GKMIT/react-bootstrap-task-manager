@@ -10,6 +10,7 @@ import MultiSelectBox from './multiselectbox'
 import DatePicker from './date'
 import TimePicker from './time'
 import FileField from './file'
+import DateTimePicker from './datetime'
 
 class MuiForm extends React.Component {
     constructor() {
@@ -20,7 +21,7 @@ class MuiForm extends React.Component {
         });
     }
 
-    handleChange = (value, index) => {        
+    handleChange = (value, index) => {
         this.props.handleChange(value, index)
         this.validator.showMessageFor(index);
         this.forceUpdate();
@@ -130,6 +131,22 @@ class MuiForm extends React.Component {
                             case 'date':
                                 return (
                                     <DatePicker
+                                        label={form.label}
+                                        name={form.name}
+                                        required={form.required}
+                                        fullWidth={fullWidth}
+                                        helperText={this.validator.message(form.name, form.value, form.validation)}
+                                        index={index}
+                                        key={index}
+                                        value={form.value}
+                                        variant={form.variant}
+                                        format={form.format}
+                                        handleChange={this.handleChange}
+                                    />
+                                )
+                            case 'datetime':
+                                return (
+                                    <DateTimePicker
                                         label={form.label}
                                         name={form.name}
                                         required={form.required}
