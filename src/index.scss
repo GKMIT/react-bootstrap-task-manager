@@ -1,8 +1,6 @@
 /* make the customizations */
-$theme-colors: (
-    "info": teal,
-    "danger": tomato
-);
+$theme-colors: ("info": teal,
+    "danger": tomato);
 
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";
@@ -12,7 +10,23 @@ $theme-colors: (
 
 
 .react-datepicker-wrapper {
-    display: block; 
+    display: block;
     padding: 0;
     border: 0;
+}
+
+.modal-loader {
+    .modal-content {
+        background: transparent;
+        color: #fff;
+        border: none;
+
+        .modal-body {
+            text-align: center;
+
+            p {
+                margin-left: 10px;
+            }
+        }
+    }
 }
