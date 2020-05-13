@@ -340,5 +340,15 @@ class MuiForm extends React.Component {
     }
 }
 
+function mapState(state) {
+    const { formError } = state;
+    return {
+        formError
+    };
+}
 
-export default MuiForm;
+const actionCreators = {
+    clearData: crudActions._clear,
+};
+
+export default connect(mapState, actionCreators)(MuiForm);

@@ -254,4 +254,4 @@ const actionCreators = {
     clearData: crudActions._clear,
 };
 
-export default connect(mapState, actionCreators)(withStyles(styles)(MuiForm));
+export default connect(mapState, actionCreators)(MuiForm);

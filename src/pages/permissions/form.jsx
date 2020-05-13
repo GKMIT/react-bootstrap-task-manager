@@ -38,7 +38,7 @@ class Form extends React.Component {
             label: 'Details',
             type: 'textarea',
             value: form.details,
-            validation: 'required',
+            validation: null,
         })
 
         return formFields
