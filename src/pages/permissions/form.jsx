@@ -28,7 +28,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'code',
             label: 'Code',
-            type: 'text',            
+            type: 'text',
             value: form.code,
             validation: 'required',
         })
@@ -60,6 +60,9 @@ class Form extends React.Component {
             newState.action = 'update'
             newState.form = props.form
         }
+        if (props.formSubmit) {
+            props.history.push('/permissions')
+        }
         return newState
     }
 
@@ -82,9 +85,7 @@ class Form extends React.Component {
             } else {
                 this.props.createData('form', 'permissions', formData)
             }
-            this.props.history.push('/permissions')
         }
-
     }
 
     render() {
@@ -106,9 +107,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { form } = state;
+    const { form, formSubmit } = state;
     return {
-        form: form,
+        form,
+        formSubmit
     };
 }
 

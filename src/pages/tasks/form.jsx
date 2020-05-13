@@ -34,7 +34,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'user_id',
             label: 'User',
-            type: 'select',            
+            type: 'select',
             value: form.user_id,
             options: users,
             validation: 'required',
@@ -43,7 +43,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'name',
             label: 'Name',
-            type: 'text',            
+            type: 'text',
             value: form.name,
             validation: 'required',
         })
@@ -102,7 +102,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'details',
             label: 'Details',
-            type: 'text',            
+            type: 'text',
             value: form.details,
             validation: 'required',
         })
@@ -126,6 +126,9 @@ class Form extends React.Component {
             newState.submitText = 'Edit'
             newState.action = 'update'
             newState.form = props.form
+        }
+        if (props.formSubmit) {
+            props.history.push('/tasks')
         }
         return newState
     }
@@ -155,9 +158,7 @@ class Form extends React.Component {
             } else {
                 this.props.createData('form', 'tasks', formData)
             }
-            this.props.history.push('/tasks')
         }
-
     }
 
     render() {
@@ -179,9 +180,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { form, users } = state;
+    const { form, formSubmit, users } = state;
     return {
-        form: form,
+        form,
+        formSubmit,
         users
     };
 }

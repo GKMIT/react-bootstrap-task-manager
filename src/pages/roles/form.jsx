@@ -62,6 +62,9 @@ class Form extends React.Component {
             newState.action = 'update'
             newState.form = props.form
         }
+        if (props.formSubmit) {
+            props.history.push('/roles')
+        }
         return newState
     }
 
@@ -83,10 +86,8 @@ class Form extends React.Component {
                 this.props.updateData('form', 'roles', id, formData)
             } else {
                 this.props.createData('form', 'roles', formData)
-            }
-            this.props.history.push('/roles')
+            }            
         }
-
     }
 
     render() {
@@ -108,7 +109,7 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { form, permissions } = state;
+    const { form, formSubmit, permissions } = state;
     let permissionData = []
     if (permissions) {
         permissions.forEach(element => {
@@ -119,7 +120,8 @@ function mapState(state) {
         });
     }
     return {
-        form: form,
+        form,
+        formSubmit,
         permissions: permissionData
     };
 }

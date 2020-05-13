@@ -59,7 +59,7 @@ class Form extends React.Component {
             label: 'profile',
             type: 'file',
             value: form.image,
-            validation: 'required',
+            validation: null,
             editable: true,
             accept: 'image/*',
         })
@@ -109,6 +109,9 @@ class Form extends React.Component {
             newState.form.image = props.fileUpload.result
             props.clearUpload();
         }
+        if (props.formSubmit) {
+            props.history.push('/users')
+        }
         return newState
     }
 
@@ -138,7 +141,6 @@ class Form extends React.Component {
             } else {
                 this.props.createData('form', 'users', formData)
             }
-            this.props.history.push('/users')
         }
 
     }
@@ -163,9 +165,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { form, roles, fileUpload } = state;
+    const { form, formSubmit, roles, fileUpload } = state;
     return {
-        form: form,
+        form,
+        formSubmit,
         roles,
         fileUpload
     };
