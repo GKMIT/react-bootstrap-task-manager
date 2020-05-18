@@ -13,7 +13,7 @@ class Copyright extends React.Component {
             <React.Fragment>
                 <p>
                     All rights reserved
-                    {' '}<a color="inherit" href="#">{appTitle}</a>{' '}
+                    {' '}{appTitle}{' '}
                     &copy; {this.showCurrentYear()}
                 </p>
             </React.Fragment>
