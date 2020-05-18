@@ -1,9 +1,9 @@
 import React from 'react';
-import MuiForm from '../../component/form'
+import MuiForm from '../../component/form/expansionForm'
 import FormLayout from '../../theme/formLayout'
 
 import { connect } from 'react-redux';
-import { crudActions, alertActions } from '../../_actions';
+import { crudActions, alertActions, fileActions } from '../../_actions';
 
 class Form extends React.Component {
 
@@ -30,84 +30,96 @@ class Form extends React.Component {
     createForm = () => {
         const { form } = this.state
         const { users } = this.props
-        let formFields = []
-        formFields.push({
-            name: 'user_id',
-            label: 'User',
-            type: 'select',
-            value: form.user_id,
-            options: users,
-            validation: 'required',
-        })
+        let steps = []
 
-        formFields.push({
-            name: 'name',
-            label: 'Name',
-            type: 'text',
-            value: form.name,
-            validation: 'required',
-        })
-
-        formFields.push({
-            name: 'datetime',
-            label: 'Date Time',
-            type: 'datetime',
-            variant: 'inline',
-            format: 'dd-MM-yyyy hh:mm aa',
-            value: form.datetime,
-            validation: 'required',
-        })
-
-        formFields.push({
-            name: 'start_date',
-            label: 'Start Date',
-            type: 'date',
-            variant: 'inline',
-            format: 'dd-MM-yyyy',
-            value: form.start_date,
-            validation: 'required',
-        })
-
-        formFields.push({
-            name: 'start_time',
-            label: 'Start Time',
-            type: 'time',
-            variant: 'inline',
-            format: 'hh:mm aa',
-            value: form.start_time,
-            validation: 'required',
-        })
-
-        formFields.push({
-            name: 'end_date',
-            label: 'End Date',
-            type: 'date',
-            variant: 'inline',
-            format: 'dd-MM-yyyy',
-            value: form.end_date,
-            validation: 'required',
-        })
-
-        formFields.push({
-            name: 'end_time',
-            label: 'End Time',
-            type: 'time',
-            variant: 'inline',
-            format: 'hh:mm aa',
-            value: form.end_time,
-            validation: 'required',
+        steps.push({
+            label: 'Select User',
+            formFields: [
+                {
+                    name: 'user_id',
+                    label: 'User',
+                    type: 'select',
+                    value: form.user_id,
+                    options: users,
+                    validation: 'required',
+                },
+                {
+                    name: 'document',
+                    label: 'Document',
+                    type: 'file',
+                    icon: 'cloud_upload',
+                    value: form.document,
+                    validation: null,
+                    editable: true,
+                    accept: 'application/pdf,application/msword',
+                }
+            ]
         })
 
 
-        formFields.push({
-            name: 'details',
-            label: 'Details',
-            type: 'text',
-            value: form.details,
-            validation: 'required',
+        steps.push({
+            label: 'Task Details',
+            formFields: [
+                {
+                    name: 'name',
+                    label: 'Name',
+                    type: 'text',
+                    value: form.name,
+                    validation: 'required',
+                },
+                {
+                    name: 'details',
+                    label: 'Details',
+                    type: 'text',
+                    value: form.details,
+                    validation: 'min:1',
+                }
+            ]
         })
 
-        return formFields
+        steps.push({
+            label: 'Task Date & time',
+            formFields: [
+                {
+                    name: 'start_date',
+                    label: 'Start Date',
+                    type: 'date',
+                    variant: 'inline',
+                    format: 'dd-MM-yyyy',
+                    value: form.start_date,
+                    validation: 'required',
+                },
+                {
+                    name: 'start_time',
+                    label: 'Start Time',
+                    type: 'time',
+                    variant: 'inline',
+                    format: 'hh:mm aa',
+                    value: form.start_time,
+                    validation: 'required',
+                },
+                {
+                    name: 'end_date',
+                    label: 'End Date',
+                    type: 'date',
+                    variant: 'inline',
+                    format: 'dd-MM-yyyy',
+                    value: form.end_date,
+                    validation: 'required',
+                },
+                {
+                    name: 'end_time',
+                    label: 'End Time',
+                    type: 'time',
+                    variant: 'inline',
+                    format: 'hh:mm aa',
+                    value: form.end_time,
+                    validation: 'required',
+                }
+            ]
+        })
+
+        return steps
     }
 
     componentDidMount() {
@@ -140,6 +152,10 @@ class Form extends React.Component {
         this.setState(form)
     }
 
+    fileUpload = (file) => {
+        this.props.upload(file, 'document')
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
         const { action, id, form } = this.state
@@ -166,11 +182,12 @@ class Form extends React.Component {
         return (
             <FormLayout title={title} fullWidth={false}>
                 <MuiForm
-                    formFields={this.createForm()}
+                    steps={this.createForm()}
                     handleChange={this.handleChange}
+                    fileUpload={this.fileUpload}
                     handleSubmit={this.handleSubmit}
                     submitText={submitText}
-                    submitFullWidth={true}
+                    submitFullWidth={false}
                     fullWidth={true}
                     noValidate={false}
                 />
@@ -180,11 +197,12 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { form, formSubmit, users } = state;
+    const { form, formSubmit, users, fileUpload } = state;
     return {
         form,
         formSubmit,
-        users
+        users,
+        fileUpload
     };
 }
 
@@ -194,6 +212,8 @@ const actionCreators = {
     showError: alertActions.error,
     createData: crudActions._create,
     updateData: crudActions._update,
+    upload: fileActions._upload,
+    clearUpload: fileActions._clear,
 };
 
 export default connect(mapState, actionCreators)(Form);
