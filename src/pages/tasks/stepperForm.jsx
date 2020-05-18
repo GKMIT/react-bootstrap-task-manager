@@ -48,7 +48,7 @@ class Form extends React.Component {
                     type: 'file',
                     icon: 'cloud_upload',
                     value: form.document,
-                    validation: 'required',
+                    validation: null,
                     editable: true,
                     accept: 'application/pdf,application/msword',
                 }
@@ -125,7 +125,7 @@ class Form extends React.Component {
         const { id } = this.props
         this.props.getAll('users', 'users')
         if (id && id !== 'new') {
-            this.props.getData('task', 'tasks', id)
+            this.props.getData('form', 'tasks', id)
         }
     }
 
@@ -144,6 +144,9 @@ class Form extends React.Component {
         if (props.fileUpload !== null) {
             newState.form.document = props.fileUpload.result
             props.clearUpload();
+        }
+        if (props.formSubmit) {
+            props.closeModal();
         }
         return newState
     }
@@ -173,11 +176,10 @@ class Form extends React.Component {
                 document: form.document,
             }
             if (action === 'update') {
-                this.props.updateData('task', 'tasks', id, formData)
+                this.props.updateData('form', 'tasks', id, formData)
             } else {
-                this.props.createData('task', 'tasks', formData)
+                this.props.createData('form', 'tasks', formData)
             }
-            this.props.closeModal();
         }
     }
 
@@ -199,9 +201,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { task, users, fileUpload } = state;
+    const { form, formSubmit, users, fileUpload } = state;
     return {
-        form: task,
+        form,
+        formSubmit,
         users,
         fileUpload
     };

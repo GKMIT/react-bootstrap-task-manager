@@ -48,7 +48,7 @@ class Form extends React.Component {
     componentDidMount() {
         const { id } = this.props.match.params
         if (id && id !== 'new') {
-            this.props.getData('role', 'roles', id)
+            this.props.getData('form', 'roles', id)
         }
         this.props.getAll('permissions', 'permissions')
     }
@@ -61,6 +61,9 @@ class Form extends React.Component {
             newState.submitText = 'Edit'
             newState.action = 'update'
             newState.form = props.form
+        }
+        if (props.formSubmit) {
+            props.history.push('/roles')
         }
         return newState
     }
@@ -80,13 +83,11 @@ class Form extends React.Component {
                 permissions: JSON.stringify(form.permissions),
             }
             if (action === 'update') {
-                this.props.updateData('role', 'roles', id, formData)
+                this.props.updateData('form', 'roles', id, formData)
             } else {
-                this.props.createData('role', 'roles', formData)
-            }
-            this.props.history.push('/roles')
+                this.props.createData('form', 'roles', formData)
+            }            
         }
-
     }
 
     render() {
@@ -108,7 +109,7 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { role, permissions } = state;
+    const { form, formSubmit, permissions } = state;
     let permissionData = []
     if (permissions) {
         permissions.forEach(element => {
@@ -119,7 +120,8 @@ function mapState(state) {
         });
     }
     return {
-        form: role,
+        form,
+        formSubmit,
         permissions: permissionData
     };
 }

@@ -34,7 +34,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'user_id',
             label: 'User',
-            type: 'select',            
+            type: 'select',
             value: form.user_id,
             options: users,
             validation: 'required',
@@ -43,7 +43,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'name',
             label: 'Name',
-            type: 'text',            
+            type: 'text',
             value: form.name,
             validation: 'required',
         })
@@ -102,7 +102,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'details',
             label: 'Details',
-            type: 'text',            
+            type: 'text',
             value: form.details,
             validation: 'required',
         })
@@ -114,7 +114,7 @@ class Form extends React.Component {
         const { id } = this.props.match.params
         this.props.getAll('users', 'users')
         if (id && id !== 'new') {
-            this.props.getData('task', 'tasks', id)
+            this.props.getData('form', 'tasks', id)
         }
     }
 
@@ -126,6 +126,9 @@ class Form extends React.Component {
             newState.submitText = 'Edit'
             newState.action = 'update'
             newState.form = props.form
+        }
+        if (props.formSubmit) {
+            props.history.push('/tasks')
         }
         return newState
     }
@@ -151,13 +154,11 @@ class Form extends React.Component {
                 details: form.details,
             }
             if (action === 'update') {
-                this.props.updateData('task', 'tasks', id, formData)
+                this.props.updateData('form', 'tasks', id, formData)
             } else {
-                this.props.createData('task', 'tasks', formData)
+                this.props.createData('form', 'tasks', formData)
             }
-            this.props.history.push('/tasks')
         }
-
     }
 
     render() {
@@ -179,9 +180,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { task, users } = state;
+    const { form, formSubmit, users } = state;
     return {
-        form: task,
+        form,
+        formSubmit,
         users
     };
 }

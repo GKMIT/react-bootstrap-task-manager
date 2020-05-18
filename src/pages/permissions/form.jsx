@@ -28,7 +28,7 @@ class Form extends React.Component {
         formFields.push({
             name: 'code',
             label: 'Code',
-            type: 'text',            
+            type: 'text',
             value: form.code,
             validation: 'required',
         })
@@ -38,7 +38,7 @@ class Form extends React.Component {
             label: 'Details',
             type: 'textarea',
             value: form.details,
-            validation: 'required',
+            validation: null,
         })
 
         return formFields
@@ -47,7 +47,7 @@ class Form extends React.Component {
     componentDidMount() {
         const { id } = this.props.match.params
         if (id && id !== 'new') {
-            this.props.getData('permission', 'permissions', id)
+            this.props.getData('form', 'permissions', id)
         }
     }
 
@@ -59,6 +59,9 @@ class Form extends React.Component {
             newState.submitText = 'Edit'
             newState.action = 'update'
             newState.form = props.form
+        }
+        if (props.formSubmit) {
+            props.history.push('/permissions')
         }
         return newState
     }
@@ -78,13 +81,11 @@ class Form extends React.Component {
                 details: form.details,
             }
             if (action === 'update') {
-                this.props.updateData('permission', 'permissions', id, formData)
+                this.props.updateData('form', 'permissions', id, formData)
             } else {
-                this.props.createData('permission', 'permissions', formData)
+                this.props.createData('form', 'permissions', formData)
             }
-            this.props.history.push('/permissions')
         }
-
     }
 
     render() {
@@ -106,9 +107,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { permission } = state;
+    const { form, formSubmit } = state;
     return {
-        form: permission,
+        form,
+        formSubmit
     };
 }
 

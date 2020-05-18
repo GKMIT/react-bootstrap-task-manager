@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 class BootDateTimePicker extends React.Component {
 
     handleChange = (value, name, index) => {
-        console.log(value)
         this.props.handleChange(value, name, index)
     }
 

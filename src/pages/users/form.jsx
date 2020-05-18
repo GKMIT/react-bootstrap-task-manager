@@ -59,7 +59,7 @@ class Form extends React.Component {
             label: 'profile',
             type: 'file',
             value: form.image,
-            validation: 'required',
+            validation: null,
             editable: true,
             accept: 'image/*',
         })
@@ -88,7 +88,7 @@ class Form extends React.Component {
     componentDidMount() {
         const { id } = this.props.match.params
         if (id && id !== 'new') {
-            this.props.getData('user', 'users', id)
+            this.props.getData('form', 'users', id)
         }
         this.props.getAll('roles', 'roles')
     }
@@ -109,6 +109,9 @@ class Form extends React.Component {
             newState.form.image = props.fileUpload.result
             props.clearUpload();
         }
+        if (props.formSubmit) {
+            props.history.push('/users')
+        }
         return newState
     }
 
@@ -117,7 +120,7 @@ class Form extends React.Component {
         form[name] = value
         this.setState(form)
     }
-    
+
     fileUpload = (file) => {
         this.props.upload(file, 'image')
     }
@@ -134,11 +137,10 @@ class Form extends React.Component {
                 dob: form.dob,
             }
             if (action === 'update') {
-                this.props.updateData('user', 'users', id, formData)
+                this.props.updateData('form', 'users', id, formData)
             } else {
-                this.props.createData('user', 'users', formData)
+                this.props.createData('form', 'users', formData)
             }
-            this.props.history.push('/users')
         }
 
     }
@@ -163,9 +165,10 @@ class Form extends React.Component {
 }
 
 function mapState(state) {
-    const { user, roles, fileUpload } = state;
+    const { form, formSubmit, roles, fileUpload } = state;
     return {
-        form: user,
+        form,
+        formSubmit,
         roles,
         fileUpload
     };
