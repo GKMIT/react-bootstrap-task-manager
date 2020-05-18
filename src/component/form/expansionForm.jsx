@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Tabs, Tab } from 'react-bootstrap';
+import { Button, Accordion, Card } from 'react-bootstrap';
 import SimpleReactValidator from 'simple-react-validator';
 import { connect } from 'react-redux';
 import { crudActions } from '../../_actions';
@@ -179,15 +179,24 @@ class MuiForm extends React.Component {
             <React.Fragment>
                 <form noValidate onSubmit={this.handleSubmit}>
 
-                    <Tabs activeKey={activeStep}>
+                    <Accordion activeKey={activeStep}>
                         {steps.map((step, stepIndex) => {
                             return (
-                                <Tab eventKey={stepIndex} title={step.label}>
-                                    {this.renderFormField(step)}
-                                </Tab>
+                                <Card>
+                                    <Card.Header>
+                                        {step.label}
+                                    </Card.Header>
+
+                                    <Accordion.Collapse eventKey={stepIndex}>
+                                        <Card.Body>
+                                            {this.renderFormField(step)}
+                                        </Card.Body>
+                                    </Accordion.Collapse>
+
+                                </Card>
                             )
                         })}
-                    </Tabs>
+                    </Accordion>
 
                     <div>
                         {activeStep === steps.length ? (
