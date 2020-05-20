@@ -1,7 +1,6 @@
 import { userConstants } from '../_constants';
 import { userService } from '../_services';
 import { alertActions } from './alert.actions';
-import { history } from '../_helpers';
 
 export const userActions = {
     login,
@@ -15,9 +14,10 @@ function login(username, password) {
 
         userService.login(username, password)
             .then(
-                user => {
-                    dispatch(success(user.message));
-                    history.push('/dashboard');
+                result => {
+                    if (result.status === 200) {
+                        dispatch(success(result.message));
+                    }
                 },
                 error => {
                     dispatch(failure(error.message));
@@ -32,7 +32,6 @@ function login(username, password) {
 }
 
 function logout() {
-    userService.logout();
-    history.push('/');
+    userService.logout();    
     return { type: userConstants.LOGOUT };
 }

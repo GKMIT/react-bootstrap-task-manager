@@ -7,7 +7,7 @@ import MuiForm from '../component/form'
 
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
-
+import FirebaseLogin from './firebaseLogin'
 
 class Login extends React.Component {
 
@@ -30,7 +30,7 @@ class Login extends React.Component {
         formFields.push({
             name: 'email',
             label: 'Email',
-            type: 'email',            
+            type: 'email',
             value: form.email,
             validation: 'required|email',
         })
@@ -58,7 +58,7 @@ class Login extends React.Component {
         this.props.login(form.email, form.password)
     }
 
-    render() {        
+    render() {
         const { title, submitText } = this.state
         return (
             <div>
@@ -75,6 +75,7 @@ class Login extends React.Component {
                                 fullWidth={true}
                                 noValidate={false}
                             />
+                            <FirebaseLogin />
                             <Copyright />
                         </Col>
                     </Row>
