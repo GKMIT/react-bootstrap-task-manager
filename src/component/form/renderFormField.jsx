@@ -15,6 +15,10 @@ class RenderFormField extends React.PureComponent {
     handleChange = (value, index) => {
         this.props.handleChange(value, index)
     }
+    
+    fileUpload = (file) => {
+        this.props.fileUpload(file)
+    }
 
     render() {
         const { form, fullWidth, helperText, index } = this.props

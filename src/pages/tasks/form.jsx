@@ -130,7 +130,7 @@ class Form extends React.Component {
         }
     }
 
-    static getDerivedStateFromProps(props) {
+    static getDerivedStateFromProps(props, state) {
         let newState = {};
         if (props.match.params.id !== 'new' && props.form !== null) {
             newState.id = props.match.params.id
@@ -138,6 +138,8 @@ class Form extends React.Component {
             newState.submitText = 'Edit'
             newState.action = 'update'
             newState.form = props.form
+        } else {
+            newState.form = state.form
         }
         if (props.formSubmit) {
             props.history.push('/tasks')
