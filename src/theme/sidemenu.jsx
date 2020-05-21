@@ -9,11 +9,7 @@ import { userActions } from '../_actions';
 class SideMenu extends React.Component {
     handleLogout = () => {
         this.props.logout();
-        this.props.history.push('/');
-        const { openMenu } = this.state
-        this.setState({
-            openMenu: !openMenu
-        })
+        this.props.history.push('/');        
     }
 
     render() {
