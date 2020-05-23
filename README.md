@@ -42,6 +42,7 @@ npm start
 [react-bootstrap-sweetalert] (https://www.npmjs.com/package/react-bootstrap-sweetalert)
 [react-data-table-component] (https://www.npmjs.com/package/react-data-table-component)
 [react-datepicker] (https://www.npmjs.com/package/react-datepicker)
+[react-date-range] (https://www.npmjs.com/package/react-date-range)
 [react-sidebar] (https://www.npmjs.com/package/react-sidebar)
 [styled-components] (https://www.npmjs.com/package/styled-components)
 

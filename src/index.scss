@@ -15,6 +15,11 @@ $theme-colors: ("info": teal,
     border: 0;
 }
 
+.daterange-modal {
+    width: 70%;
+    max-width: none!important;
+}
+
 .modal-loader {
     .modal-content {
         background: transparent;
