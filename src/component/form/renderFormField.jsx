@@ -9,6 +9,7 @@ import DatePicker from './date'
 import TimePicker from './time'
 import FileField from './file'
 import DateTimePicker from './datetime'
+import DateRangePicker from './daterange'
 
 
 class RenderFormField extends React.PureComponent {
@@ -105,6 +106,22 @@ class RenderFormField extends React.PureComponent {
             case 'date':
                 return (
                     <DatePicker
+                        label={form.label}
+                        name={form.name}
+                        required={form.required}
+                        fullWidth={fullWidth}
+                        helperText={helperText}
+                        index={index}
+                        key={index}
+                        value={form.value}
+                        variant={form.variant}
+                        format={form.format}
+                        handleChange={this.handleChange}
+                    />
+                )
+            case 'daterange':
+                return (
+                    <DateRangePicker
                         label={form.label}
                         name={form.name}
                         required={form.required}

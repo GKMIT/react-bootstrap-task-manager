@@ -20,7 +20,11 @@ class Form extends React.Component {
                 mobile: '',
                 email: '',
                 image: '',
-                dob: new Date()
+                dob: new Date(),
+                workingDay: {
+                    startDate: new Date(),
+                    endDate: new Date(),
+                },
             },
         }
     }
@@ -79,6 +83,15 @@ class Form extends React.Component {
             variant: 'inline',
             format: 'dd-MM-yyyy',
             value: form.dob,
+            validation: 'required',
+        })
+        formFields.push({
+            name: 'workingDay',
+            label: 'Working Day',
+            type: 'daterange',
+            variant: 'inline',
+            format: 'DD-MM-YYYY',
+            value: form.workingDay,
             validation: 'required',
         })
 
